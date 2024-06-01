@@ -8,8 +8,8 @@ public class ActoresDaos {
     private static final String username= "root";
     private static final String password = "root";
 
-    public  ArrayList<Actor> list(){
-        ArrayList<Actor> listaActor = new ArrayList<>();
+    public  ArrayList<Actor> list(int idPelicula){
+        ArrayList<Actor> listaActores = new ArrayList<>();
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -17,43 +17,42 @@ public class ActoresDaos {
         }
         String url = "jdbc:mysql://localhost:3306/mydb";
 
-        String sql ="SELECT " +
-                "    a.idActor," +
-                "    a.Nombre," +
-                "    a.Apellido," +
-                "    a.anoNacimiento as AnoNacimiento," +
+        String sql = "SELECT " +
+                "    a.idActor, " +
+                "    a.Nombre, " +
+                "    a.Apellido, " +
+                "    a.anoNacimiento as AnoNacimiento, " +
                 "    CASE " +
-                "        WHEN a.premioOscar = 1 THEN 'TRUE'" +
-                "        ELSE 'FLASE'" +
-                "    END AS GanoPremioOscar" +
+                "        WHEN a.premioOscar = 1 THEN 'TRUE' " +
+                "        ELSE 'FALSE' " +
+                "    END AS GanoPremioOscar " +
                 "FROM " +
-                "    actor a" +
+                "    actor a " +
                 "JOIN " +
-                "    protagonistas pa ON a.idActor = pa.idActor" +
+                "    protagonistas pa ON a.idActor = pa.idActor " +
                 "WHERE " +
-                "    pa.idPelicula = idPelicula;";
+                "    pa.idPelicula = ?;";
 
         try (Connection conn = DriverManager.getConnection(url, username, password);
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            while (rs.next()){
+            stmt.setInt(1, idPelicula);
+            ResultSet rs = stmt.executeQuery();
 
+            while (rs.next()) {
                 Actor actor = new Actor();
+                // Valores de las columnas de la tabla Actores
+                actor.setIdActor(rs.getInt("idActor"));
+                actor.setNombre(rs.getString("Nombre"));
+                actor.setApellido(rs.getString("Apellido"));
+                actor.setAnoNacimiento(rs.getInt("AnoNacimiento"));
+                actor.setPremioOscar(Boolean.parseBoolean(rs.getString("GanoPremioOscar")));
 
-                //Valores de las columnas de la tabla Actores
-                actor.setIdActor(rs.getInt(1));
-                actor.setNombre(rs.getString(2));
-                actor.setApellido(rs.getString(3));
-                actor.setAnoNacimiento(rs.getInt(4));
-                actor.setPremioOscar(rs.getBoolean(5));
-
-                listaActor.add(actor);
+                listaActores.add(actor);
             }
-
         } catch (SQLException e) {
-        throw new RuntimeException(e);}
-
-        return listaActor;
+            throw new RuntimeException(e);
+        }
+        return listaActores;
     }
 }

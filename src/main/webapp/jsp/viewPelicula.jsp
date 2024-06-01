@@ -9,9 +9,9 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="com.example.l06.beans.Pelicula" %>
 <%
-    ArrayList<Pelicula> listaPeliculas = (ArrayList<Pelicula>) request.getAttribute("lista");
-    if (listaPeliculas == null) {
-        listaPeliculas = new ArrayList<>();
+    ArrayList<Pelicula> pelicula = (ArrayList<Pelicula>) request.getAttribute("lista");
+    if (pelicula == null) {
+        pelicula = new ArrayList<>();
     }
 %>
 <html>
@@ -19,12 +19,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Más información</title>
-    <link rel="stylesheet" href="styles_view.css">
+    <link rel="stylesheet" href="../css/styles_view.css">
 </head>
 <body>
 <div class="container">
-    <% for (Pelicula pelicula: listaPeliculas){ %>
-    <h1><%= pelicula.getTitulo() %></h1>
+    <% for (Pelicula pelicula1: pelicula){ %>
+    <h1><%= pelicula1.getTitulo() %></h1>
 
     <table>
         <thead>
@@ -40,12 +40,12 @@
         </thead>
         <tbody>
         <tr>
-            <td id="idActor"><%= pelicula.getIdActor() %></td>
-            <td id="Director"><%= pelicula.getDirector() %></td>
-            <td id="Año de Publicación"><%= pelicula.getAnoPublicado() %></td>
-            <td id="Rating"><%= pelicula.getRating() %>/10</td>
-            <td id="Box Office">$<%= pelicula.getBoxOffice() %></td>
-            <td id="Género"><%= pelicula.getGenero().getNombre() %></td>
+            <td id="idPelicula"><%= pelicula1.getIdPelicula() %></td>
+            <td id="Director"><%= pelicula1.getDirector() %></td>
+            <td id="Año de Publicación"><%= pelicula1.getAnoPublicado() %></td>
+            <td id="Rating"><%= pelicula1.getRating() %>/10</td>
+            <td id="Box Office">$<%= pelicula1.getBoxOffice() %></td>
+            <td id="Género"><%= pelicula1.getGenero().getNombre() %></td>
             <td id="Actores"><a href="listaActores.jsp">Ver Actores</a></td>
         </tr>
         </tbody>

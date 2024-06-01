@@ -7,6 +7,6 @@
 <body>
 <h1><%= "Hello World!" %></h1>
 <br/>
-<a href="WEB-INF/listaPeliculas.jsp">Hello Servlet</a>
+<a href="listaPeliculas.jsp">Hello Servlet</a>
 </body>
 </html>
