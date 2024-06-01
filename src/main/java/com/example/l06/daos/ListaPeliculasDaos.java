@@ -21,6 +21,7 @@ public class ListaPeliculasDaos {
         String sql ="SELECT p.idPelicula, p.titulo, p.director, p.anoPublicacion, p.rating, p.boxOffice, g.nombre AS genero " +
                 "FROM pelicula p " +
                 "JOIN genero g ON p.idGenero = g.idGenero;";
+        
 
         try  (Connection conn = DriverManager.getConnection(url, user, pass)){
             Statement stmt = conn.createStatement();
