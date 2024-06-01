@@ -29,7 +29,7 @@ public class DetallesServlet extends HttpServlet {
 
         request.setAttribute("listaActores", listaActores);
 
-        RequestDispatcher view = request.getRequestDispatcher("viewPelicula.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("jsp/viewPelicula.jsp");
         view.forward(request, response);
     }
 }

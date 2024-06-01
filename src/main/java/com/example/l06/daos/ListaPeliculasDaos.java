@@ -125,7 +125,7 @@ public class ListaPeliculasDaos {
                 pelicula.setAnoPublicado(rs.getInt("anoPublicacion"));
                 pelicula.setRating(rs.getDouble("rating"));
                 pelicula.setBoxOffice(rs.getInt("boxOffice"));
-                generoPelicula.setNombre(rs.getString("genero"));
+                generoPelicula.setNombre(rs.getString("nombre"));
                 pelicula.setGenero(generoPelicula);
             }
 

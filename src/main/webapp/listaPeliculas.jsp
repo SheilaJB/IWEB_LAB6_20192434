@@ -45,13 +45,13 @@
             <tbody>
             <% for (Pelicula pelicula: listaPeliculas) { %>
                 <tr>
-                    <td id="Título"><a href="jsp/viewPelicula.jsp"><%= pelicula.getTitulo() %></a></td>
+                    <td id="Título"><a href="<%=request.getContextPath()%>/DetallesServlet?idPelicula=<%=pelicula.getIdPelicula()%>"><%= pelicula.getTitulo() %></a></td>
                     <td id="Director"><%= pelicula.getDirector() %></td>
                     <td id="Año de Publicación"><%= pelicula.getAnoPublicado() %></td>
                     <td id="Rating"><%= pelicula.getRating() %>/10</td>
                     <td id="Box Office">$<%= pelicula.getBoxOffice() %></td>
                     <td id="Género"><%= pelicula.getGenero().getNombre() %></td>
-                    <td id="Actores"><a href="jsp/listaActores.jsp">Ver Actores</a></td>
+                    <td id="Actores"><a href="<%=request.getContextPath()%>/ActorServlet?idPelicula=<%=pelicula.getIdPelicula()%>">Ver Actores</a></td>
                 </tr>
             <% }%>
             </tbody>

@@ -7,17 +7,24 @@
 --%>
 <%@ page import="com.example.l06.beans.Actor" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.l06.beans.Pelicula" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    Pelicula pelicula = (Pelicula) request.getAttribute("pelicula");
+    if (pelicula == null) {
+        pelicula = new Pelicula();
+    }
+%>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de actores</title>
-    <link rel="stylesheet" href="../css/styles_actor.css">
+    <link rel="stylesheet" href="css/styles_actor.css">
 </head>
 <body>
 <div class="container">
-    <h1>Lista de Películas</h1>
+    <h1><%= pelicula.getTitulo() %></h1>
 
     <table>
         <thead>
